@@ -1,0 +1,37 @@
+<%# トップ画面ここから %>
+<div class="top_wrapper">
+  <div class="title_container">
+    <span><%= image_tag 'jimo_icon.png', class: 'top_title' %></span>
+  </div>
+  <div class="btn_container row">
+      <button type="button" class="btn btn-info col-sm">分類で見る</button>
+      <button type="button" class="btn btn-info col-sm">期限で見る</button>
+      <button type="button" class="btn btn-info col-sm">値段で見る</button>
+      <button type="button" class="btn btn-info col-sm">場所で見る</button>
+  </div>
+    <% if @current_user == nil %>
+      <div class="guest-icon rounded-right">
+        <%= link_to "login/guest",{method: :post} do %>
+      <%= image_tag('guest-icon.png',class: 'guest-logo') %>
+      <p class="card-img-overlay text-white">ゲストログインして投稿を見てみる</p>
+      <% end %>
+      <% end %>
+      </div>
+</div>
+<%# トップ画面ここまで %>
+<%# インフォここから %>
+<div class="info_wrapper">
+  <div class ="info_message">
+    <h1>「フードロスにも地産地消を」</h1>
+    <p>Jimo-shareとは...</p>
+    <p class="text-justify">生産製造現場では形が悪い、通常販売に向かないものや、 賞味期限が近いというだけで廃棄される食品や農産物が多くあります。一方で、食費のかかるペットやこども食堂を利用しなければいけない家庭が存在します。Jimo-shareは、地元内で双方が繋がれるようにした投稿型マッチングサービスです。
+    </p>
+  </div>
+  <div class="info_image">
+  </div>
+</div>
+<%# インフォここまで %>
+<%# コンテンツここから %>
+
+
+<%# コンテンツここまで %>

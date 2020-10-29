@@ -1,0 +1,113 @@
+// Place all the styles related to the user controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+// ユーザー関連共通
+
+
+ .user-container{
+   width: 100%;
+   margin: 0 auto;
+   min-height:800px;
+   background-color:azure;
+   padding:3%;
+   overflow: auto;
+
+  .form-group{
+    padding: 3%;
+  }
+ }
+
+ .user-form{
+  background-color: azure;
+  padding: 2%;
+  max-width: 500px;
+  margin: auto;
+}
+
+// 新規登録画面ここから
+
+
+// ログインページここから
+
+
+
+// ユーザー一覧ここから
+.user-index-area{
+  overflow: auto;
+
+.user-index-card{
+    min-width: 12em;
+    max-width: 12em;
+  button{
+    width: 100%;
+  }
+  .card-img-overlay{
+    padding-top: 50%;
+  }
+  p{
+    font-size: 1em;
+  }
+}
+}
+
+
+// ユーザー詳細ここから
+.user-show{
+}
+.user-detail{
+  max-width: 500px;
+  background-color: azure;
+}
+.user-post{
+  max-width:15em;
+  min-width:15em;
+  margin: 1em;
+  padding: 1em;
+  background-color: azure;
+}
+.user-post-image{
+  max-width:10em;
+  padding: 2%;
+}
+
+.user_image{
+  width: 50%;
+  background-color:rgb(5, 8, 7);
+}
+
+.user-detail{
+}
+
+
+
+
+// タブレット向けレイアウト
+@media all and (max-width: 1000px) {
+}
+.user-index-card{
+
+  .card-img-top{
+
+  }
+  .card-text {
+    // display: none;
+  }
+}
+
+// モバイル向けレイアウト
+@media all and (max-width: 670px) {
+
+// ユーザー一覧ここから
+.user-index-card{
+
+  .card-img-top{
+
+  }
+  .card-text {
+    display: none;
+  }
+}
+}
+

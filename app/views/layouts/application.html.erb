@@ -4,12 +4,89 @@
     <title>Jimoshare</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application','home','users','posts', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+<header>
+ <nav class="navbar navbar-expand-lg  navbar-light">
+  <a class="navbar-brand"><%= link_to image_tag('jimo_icon.png', class: 'logo'), "/" %></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+       <% if @current_user %>
+   <li class="nav-item ">
+   <a class="nav-link text-primary user-image-icon" href="<%= "/users/#{@current_user.id}" %>"><%= @current_user.name %></a> <span class="sr-only">(current)</span>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= "/posts/index" %>">投稿一覧</a>
+      </li>
+      <li class="nav-item">
+     <a class="nav-link" href="<%="/posts/new" %>">新規投稿</a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= "/users/index" %>">ユーザー一覧</a>
+      </li>
+          <li class="nav-item">
+          <a class="nav-link text-danger" href="<%= "/logout" %>"  data-method="post" >ログアウト</a>
+      </li>
+  <% else %>
+      <li class="nav-item">
+      <a class="nav-link" href="<%= "/signup" %>">新規登録</a>
+      </li>
+      <li class="nav-item">
+    <a class="nav-link" href="<%= "/login" %>">ログイン</a>
+      </li>
+  <% end %>
+    </ul>
+  </div>
+  </nav>
+</header>
+<%# ヘッダーここまで %>
+<%# フラッシュメッセージここから %>
+  <div class="flash-message">
+        <% flash.each do |message_type, message| %>
+          <div class="alert-primary alert  alert-<%= message_type %>" role="alert"><%= message %></div>
+        <% end %>
+  </div>
+<%# フラッシュメッセージここまで %>
+<%# ゲストユーザー注意ここから %>
+  <% if @guest_user %>
+  <div class="guest-message">
+    <p class="text-danger bg-white">注意: ゲストユーザーはログアウト時にユーザー情報/投稿/コメント の全てが消去されます</p>
+  </div>
+  <% end %>
+<%# ゲストユーザー注意ここまで %>
+<%# アイコンメニューここから %>
+  <% if @current_user || @guest_user %>
+    <div class="new-icon rounded-left">
+      <%= link_to "/posts/new" do %>
+        <%= image_tag('new-icon.png',class: 'new-logo')%>
+        <p class="card-img-overlay text-white">投稿する</p>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="beginer-icon rounded-left">
+      <%= link_to "/signup" do %>
+        <%= image_tag('beginer-icon.png',class: 'beginer-logo') %>
+        <p class="card-img-overlay text-white">登録して始める</p>
+      <% end %>
+    </div>
+  <% end %>
+            <%# アイコンメニューここまで %>
     <%= yield %>
+<%# フッターここから %>
+    <footer>
+    <div class="footer_top">
+    </div>
+      <div class="footer_bottom">
+      <p class="copyright">©︎2020-    y_h_tomo</p>
+    </div>
+    </footer>
+<%# フッターここまで %>
   </body>
 </html>
