@@ -27,9 +27,9 @@ jobs:
         - save_cache:
             key: jimoshare-bundle-v1-{{ checksum "Gemfile.lock" }}
             paths:
-              - vendor/bundle
-              - restore_cache:
-                keys:
+            - vendor/bundle
+            - restore_cache:
+              keys:
                   - rails-demo-yarn-{{ checksum "yarn.lock" }}
                   - rails-demo-yarn-
             - run:
