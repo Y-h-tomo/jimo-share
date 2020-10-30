@@ -1,2 +1,30 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="container-fluid">
+    <h4 class="p-3 mb-2 bg-success text-white">ユーザー　一覧</h4>
+
+        <form class="input-group index-search p-3 mb-2">
+   <%= form_tag("/users/search") do %>
+ <div class="form-row ml-3">
+      <input class="border col m-1 form-control" name="name" placeholder="ニックネーム">
+     <input class="input-group-text col m-1" for="inputGroupSelect02" type="submit" value="ニックネームで検索">
+  </div>
+<% end %>
+    </form>
+
+  <div class="user-container border">
+    <div class="user-index-area row row-cols-2 justify-content-center">
+      <% @users.each do |user| %>
+        <div class="card col-sm user-index-card p-3">
+        <img class="bd-placeholder-img card-img-top"  src="<%= "/user_images/#{user.image_name}" %>" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap">
+          <div class="card-img-overlay">
+                <%= link_to "/users/#{user.id}" do %>
+          <button class="btn btn-outline-success btn-sm bg-white text-success h-auto"><%= user.name %></button>
+           <% end %>
+          </div>
+          <div class="card-body">
+          <p class="card-text text-justify"><%= user.content %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
