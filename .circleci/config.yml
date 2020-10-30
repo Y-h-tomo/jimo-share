@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/my-app
+    working_directory: ~/jimoshare
     docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+      - image: circleci/ruby:2.6.5-node-browsers
         environment:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -15,8 +15,8 @@ jobs:
         - checkout
         - restore_cache:
             keys:
-              - my-app-bundle-v1-{{ checksum "Gemfile.lock" }}
-              - my-app-bundle-v1-
+              - jimoshare-bundle-v1-{{ checksum "Gemfile.lock" }}
+              - jimoshare-bundle-v1-
         - run:
             name: Bundlerをinstall
             command: |
@@ -26,7 +26,7 @@ jobs:
             name: Bundle Install
             command: bundle check || bundle install
         - save_cache:
-            key: my-app-bundle-v1-{{ checksum "Gemfile.lock" }}
+            key: jimoshare-bundle-v1-{{ checksum "Gemfile.lock" }}
             paths:
               - vendor/bundle
               - restore_cache:
