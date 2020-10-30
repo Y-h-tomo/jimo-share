@@ -233,7 +233,7 @@ jobs:
           environment: PRODUCTION
 
 workflows:
-  version: 2.1
+  version: 2
   main:
     jobs:
       - setup
