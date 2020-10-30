@@ -13,6 +13,23 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'factory_bot_rails'
+require 'vcr'
+require 'simplecov'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/vcr'
+  c.hook_into :webmock
+  # vcrブロック外のHTTP通信は許可する(これをtrueにしないとvcr外でHTTP通信を行なうと「UnhandledHTTPRequestError」が発生してしまう)
+  c.allow_http_connections_when_no_cassette = true
+end
+
+SimpleCov.start do
+  add_filter '/spec/'
+end
+
+
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -37,6 +54,10 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+    # FactoryBot configuration
+  # この設定を入れることにより「FactoryBot.create(:user)」この書き方から「create(:user)」こういう書き方ができるようになる
+  config.include FactoryBot::Syntax::Methods
+  
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
   # compatibility in RSpec 3). It causes shared context metadata to be
