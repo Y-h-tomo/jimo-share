@@ -10,9 +10,8 @@ jobs:
           DATABASE_URL: postgres://postgres:password@localhost:5432/myapp_test
           RAILS_ENV: test
       - image: circleci/postgres:11-alpine
-
       steps:
-        - checkout
+        - checkout:
         - restore_cache:
             keys:
               - jimoshare-bundle-v1-{{ checksum "Gemfile.lock" }}
