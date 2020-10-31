@@ -188,7 +188,7 @@ jobs:
 
 workflows:
   build_test_and_deploy:
-      jobs:
+  jobs:
       - checkout_code
       - node_dependencies:
           requires:
