@@ -188,7 +188,7 @@ jobs:
 
 workflows:
   build_test_and_deploy:
-    jobs:
+      jobs:
       - checkout_code
       - node_dependencies:
           requires:
@@ -223,15 +223,15 @@ workflows:
         filters:
           branches:
             only: develop
-    - deploy_to_production:
-        name: Deploy to production
-        env: production
-        requires:
-          - rubocop_job
-          - brakeman_job
-          - eslint_job
-          - jest_job
-          - rspec_job
-        filters:
-          branches:
-            only: master
+      - deploy_to_production:
+          name: Deploy to production
+          env: production
+          requires:
+            - rubocop_job
+            - brakeman_job
+            - eslint_job
+            - jest_job
+            - rspec_job
+          filters:
+            branches:
+              only: master
