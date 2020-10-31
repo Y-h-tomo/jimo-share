@@ -66,14 +66,14 @@ commands:
           name: Bundle install
           command: bundle check --path=vendor/bundle || bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-  # RSpecを実行するための設定系コマンド（主にフロントエンド部分）
-  test-client-settings:
-    steps:
-      - run:
-          name: RSpec Setup for webpacker
-          command: |
-            yarn install --check-files --cache-folder ~/.cache/yarn
-            NODE_ENV=production bin/rails webpacker:compile
+  # # RSpecを実行するための設定系コマンド（主にフロントエンド部分）
+  # test-client-settings:
+  #   steps:
+  #     - run:
+  #         name: RSpec Setup for webpacker
+  #         command: |
+  #           yarn install --check-files --cache-folder ~/.cache/yarn
+  #           NODE_ENV=production bin/rails webpacker:compile
 
   # テストDB設定関連のコマンド
   # https://circleci.com/docs/ja/2.0/postgres-config/
