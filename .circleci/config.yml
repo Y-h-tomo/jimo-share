@@ -47,3 +47,7 @@ jobs:
           command: bundle exec rspec
       - store_test_results:
           path: /tmp/test-results
+      # run rubocop!
+      - run:
+        name: Rubocop
+        command: bundle exec rubocop
