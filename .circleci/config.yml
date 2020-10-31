@@ -5,7 +5,7 @@ orbs:
 
 executors:
   default:
-    working_directory: ~/repo # default: ~/project
+    working_directory: ~/jimoshare # default: ~/project
     docker:
       - image: circleci/ruby:2.6.5-node-browsers
         environment:
@@ -14,9 +14,9 @@ executors:
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
   extended:
-    working_directory: ~/repo
+    working_directory: ~/jimoshare
     docker:
-      - image: circleci/ruby:2.6.3-node
+      - image: circleci/ruby:2.6.5-node-browsers
         environment:
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
@@ -39,7 +39,7 @@ commands:
       - save_cache:
           key: v1-source-code-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/repo
+            - ~/jimoshare
   restore_node_dependencies:
     steps:
       - restore_cache:
@@ -58,7 +58,7 @@ commands:
           name: Save node dependencies cache
           key: v1-node-dependencies-{{ checksum "yarn.lock" }}
           paths:
-            - ~/repo/node_modules
+            - ~/jimoshare/node_modules
   restore_bundle_dependencies:
     steps:
       - restore_cache:
@@ -89,7 +89,7 @@ commands:
       - save_cache:
           key: v1-bundle-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
-            - ~/repo/vendor/bundle
+            - ~/jimoshare/vendor/bundle
   wait_for_db_start_up:
     steps:
       - run:
