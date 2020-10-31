@@ -185,3 +185,53 @@ jobs:
           command: bundle exec rspec
       - store_test_results:
           path: /tmp/test-results
+
+workflows:
+  build_test_and_deploy:
+    jobs:
+      - checkout_code
+      - node_dependencies:
+          requires:
+            - checkout_code
+      - bundle_dependencies:
+          requires:
+            - checkout_code
+      - rubocop_job:
+          requires:
+            - bundle_dependencies
+      - brakeman_job:
+          requires:
+            - bundle_dependencies
+      - eslint_job:
+          requires:
+            - node_dependencies
+      - jest_job:
+          requires:
+            - node_dependencies
+      - rspec_job:
+          requires:
+            - bundle_dependencies
+      - deploy_to_staging:
+        name: Deploy to staging
+        env: staging
+        requires:
+          - rubocop_job
+          - brakeman_job
+          - eslint_job
+          - jest_job
+          - rspec_job
+        filters:
+          branches:
+            only: develop
+    - deploy_to_production:
+        name: Deploy to production
+        env: production
+        requires:
+          - rubocop_job
+          - brakeman_job
+          - eslint_job
+          - jest_job
+          - rspec_job
+        filters:
+          branches:
+            only: master
