@@ -4,8 +4,6 @@
 #     image: postgres
 #     volumes:
 #       - ./tmp/db:/var/lib/postgresql/data
-#     environment:
-#       - POSTGRES_PASSWORD=password
 #   web:
 #     build: .
 #     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -15,26 +13,49 @@
 #       - "3000:3000"
 #     depends_on:
 #       - db
+#       # - chrome
+#     stdin_open: true
+#     tty: true
+#   chrome:
+#     image: selenium/standalone-chrome:3.141.59-dubnium
+#     ports:
+#       - 4444:4444
 
 version: '3'
+volumes:
+  postgres_data:
+  public_data:
+  tmp_data:
+  log_data:
 services:
-  db:
-    image: postgres
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+  app:
+    build:
+      context: .
+      dockerfile: ./Docker/app/Dockerfile
+    command: bundle exec puma -C config/puma.rb
     volumes:
       - .:/jimoshare
-    ports:
-      - "3000:3000"
+      - public_data:/jimoshare/public
+      - tmp_data:/jimoshare/tmp
+      - log_data:/jimoshare/log
     depends_on:
       - db
-      # - chrome
-    stdin_open: true
-    tty: true
-  chrome:
-    image: selenium/standalone-chrome:3.141.59-dubnium
+  db:
+    build:
+        context: .
+        dockerfile: ./Docker/db/Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  web:
+    build:
+      context: .
+      dockerfile: ./Docker/web/Dockerfile
+    volumes:
+      - public_data:/jimoshare/public
+      - tmp_data:/jimoshare/tmp
     ports:
-      - 4444:4444
+      - 80:80
+    depends_on:
+      - app
