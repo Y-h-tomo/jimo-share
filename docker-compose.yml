@@ -42,11 +42,13 @@ services:
       - db
   db:
     build:
+      image: postgres:12.3
         context: .
         dockerfile: ./Docker/db/Dockerfile
     image: postgres
     environment:
-      - POSTGRES_PASSWORD=password
+      POSTGRES_HOST_AUTH_METHOD: trust
+      # - POSTGRES_PASSWORD=password
     volumes:
       - postgres_data:/var/lib/postgresql/data
   web:
