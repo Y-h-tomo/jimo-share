@@ -13,6 +13,6 @@ class User < ApplicationRecord
   # mount_uploader :image, ImageUploader
 
   def posts
-    return Post.where(user_id: self.id)
+    Post.where(user_id: id)
   end
 end

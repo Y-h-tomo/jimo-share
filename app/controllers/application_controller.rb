@@ -7,21 +7,20 @@ class ApplicationController < ActionController::Base
   end
 
   def set_guest_user
-    @guest_user = User.find_by(email: "guest@example.com")
+    @guest_user = User.find_by(email: 'guest@example.com')
   end
 
   def authenticate_user
-    if @current_user == nil
-      flash[:notice] = "ログインが必要です"
-      redirect_to("/login")
+    if @current_user.nil?
+      flash[:notice] = 'ログインが必要です'
+      redirect_to('/login')
     end
   end
 
   def forbid_login_user
     if @current_user
-      flash[:notice] = "すでにログインしています"
-      redirect_to("/posts/index")
+      flash[:notice] = 'すでにログインしています'
+      redirect_to('/posts/index')
     end
   end
-
 end

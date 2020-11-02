@@ -13,26 +13,17 @@ class Post < ApplicationRecord
   # mount_uploader :image, ImageUploader
 
   def user
-    return User.find_by(id: self.user_id)
+    User.find_by(id: user_id)
   end
 
   def comments
-    return Comment.where(post_id: self.id)
+    Comment.where(post_id: id)
   end
-
-
 end
 
-
-
-
-
-
-
-    # def generate_image
-    #   self.image = loop do
-    #     random_token = SecureRandom.urlsafe_base64(nil, false) + ".jpg"
-    #     break random_token unless self.class.exists?(image: random_token)
-    #   end
-    # end
-
+# def generate_image
+#   self.image = loop do
+#     random_token = SecureRandom.urlsafe_base64(nil, false) + ".jpg"
+#     break random_token unless self.class.exists?(image: random_token)
+#   end
+# end
