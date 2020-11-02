@@ -22,12 +22,14 @@ AllCops:
   TargetRubyVersion: 2.6.5
   TargetRailsVersion: 6.0.3
   Exclude:
+    - "config/initializers/*"
     - 'vendor/**/*'
     - 'bin/**/*'
     - 'db/**/*'
     - 'tmp/**/*'
     - 'node_modules/**/*'
     - 'lib/tasks/auto_annotate_models.rake'
+  DisplayCopNames: true
 
 Rails:
   Enabled: true
