@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   # before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
   # before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
@@ -71,7 +73,7 @@ class UsersController < ApplicationController
 
   def login
     @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
+    if @user&.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = 'ログインしました'
       redirect_to('/posts/index')
