@@ -12,8 +12,8 @@ jobs:
           POSTGRES_HOST: 127.0.0.1
       - image: circleci/postgres
         environment:
-          POSTGRES_PASSWORD: 'postgres'
           POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: app_test
     working_directory: ~/jimoshare
     steps:
