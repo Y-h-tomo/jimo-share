@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# ホーム管理コントローラー
 class HomeController < ApplicationController
   def top; end
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# 投稿管理コントローラー
 class PostsController < ApplicationController
   def index
     @posts = if params[:area].present?

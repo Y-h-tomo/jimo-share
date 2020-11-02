@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# コメント管理コントローラー
 class CommentsController < ApplicationController
   def create
     @post = Post.find_by(id: params[:id])

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# アプリケーション全体管理コントローラー
 class ApplicationController < ActionController::Base
   before_action :set_current_user
   before_action :set_guest_user
