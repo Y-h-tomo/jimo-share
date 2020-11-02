@@ -442,6 +442,8 @@ Style/WordArray:
 Style/ZeroLengthPredicate:
   Enabled: false
 
+Documentation:
+  Enabled: false
 
 # Rails:
 #   Enabled: true
