@@ -19,12 +19,12 @@
 #     - config/rubocop/rubocop.yml
 #     - config/rubocop/rails.yml
 #     - config/rubocop/rspec.yml
+# TargetRubyVersion: 2.6.5
+# TargetRailsVersion: 6.0.3
 
 ## 全体に適応する項目を定義します。ここで Exclude に設定したファイルは、チェック対象外になります。
-AllCops:
-  # TargetRubyVersion: 2.6.5
-  # TargetRailsVersion: 6.0.3
-  Exclude:
+  AllCops:
+    Exclude:
     - "config/initializers/*"
     - 'vendor/**/*'
     - 'bin/**/*'
@@ -32,7 +32,7 @@ AllCops:
     - 'tmp/**/*'
     - 'node_modules/**/*'
     - 'lib/tasks/auto_annotate_models.rake'
-  DisplayCopNames: true
+  # DisplayCopNames: true
 
 #################### Layout ################################
 

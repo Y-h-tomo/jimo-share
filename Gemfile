@@ -36,10 +36,10 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
-  # gem 'rubocop', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec'
+  gem 'rubocop', '~> 0.93.0'
+  gem 'rubocop-performance', '~> 1.8.1'
+  gem 'rubocop-rails','~> 2.8.1'
+  gem 'rubocop-rspec','~> 1.43.2'
   # gem 'rspec-rails', '~>3.8'
   # gem "factory_bot_rails", '~> 4.10.0'
   gem 'diff-lcs', '~> 1.4', '>= 1.4.4'
