@@ -49,7 +49,7 @@ services:
     environment:
       # POSTGRES_PASSWORD: 'postgres'
       # # POSTGRES_HOST_AUTH_METHOD: trust
-      - POSTGRES_PASSWORD: 'Gucchi38a'
+      - POSTGRES_PASSWORD=password
     volumes:
       - postgres_data:/var/lib/postgresql/data
   web:
