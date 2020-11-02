@@ -11,32 +11,31 @@ module Jimoshare
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-
     # ------------以下追加--------------
-    config.time_zone = 'Tokyo'
+    # config.time_zone = 'Tokyo'
 
-    config.generators do |g|
-      g.test_framework :rspec,
-                       view_specs: false,
-                       helper_specs: false,
-                       routing_specs: false
-    end
+    # config.generators do |g|
+    #   g.test_framework :rspec,
+    #                    view_specs: false,
+    #                    helper_specs: false,
+    #                    routing_specs: false
+    # end
 
-    # 認証トークンをremoteフォームに埋め込む
-    config.action_view.embed_authenticity_token_in_remote_forms = true
+    # # 認証トークンをremoteフォームに埋め込む
+    # config.action_view.embed_authenticity_token_in_remote_forms = true
     # ------------ここまで--------------
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    # config.generators do |g|
-    #   g.test_framework :rspec,
-    #         view_specs: false,
-    #         helper_specs: false,
-    #         controller_specs: false,
-    #         routing_specs: false
-    # end
+    config.generators do |g|
+      g.test_framework :rspec,
+            view_specs: false,
+            helper_specs: false,
+            controller_specs: false,
+            routing_specs: false
+    end
   end
 
 end

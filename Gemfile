@@ -36,7 +36,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
   gem 'rspec-rails', '~>3.8'
-  gem "factory_bot_rails",'~> 4.10.0'
+  gem "factory_bot_rails", '~> 4.10.0'
   gem 'diff-lcs', '~> 1.4', '>= 1.4.4'
   gem "rails_best_practices", require: false
     gem 'pry-rails'
