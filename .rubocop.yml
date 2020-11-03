@@ -2,9 +2,10 @@ require:
   - rubocop-rails
   - rubocop-rspec
 inherit_from:
-  - config/rubocop/rubocop.yml
-  - config/rubocop/rails.yml
-  - config/rubocop/rspec.yml
+  - rubocop-todo.yml
+  - rails.yml
+  - rspec.yml
 
 AllCops:
   TargetRubyVersion: 2.6.5
+

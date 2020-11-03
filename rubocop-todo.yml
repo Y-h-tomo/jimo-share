@@ -255,7 +255,7 @@ Style/CollectionMethods:
     inject: "inject"
     reduce: "inject"
 
-# ドキュメントの無い public class を許可する　日本語コメント
+# ドキュメントの無い public class を許可する
 Style/Documentation:
   Enabled: false
 
