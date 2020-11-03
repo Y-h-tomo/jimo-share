@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(
       user_id: @current_user.id,
       post_id: params[:post_id],
-      comment: params[:comment]
+      comment: params[:comment],
     )
     @comment.save!
     redirect_to("/posts/#{params[:post_id]}")
@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(
       id: params[:id],
       user_id: @current_user.id,
-      post_id: params[:post_id]
+      post_id: params[:post_id],
     )
     @comment.destroy!
     redirect_to("/posts/#{params[:post_id]}")

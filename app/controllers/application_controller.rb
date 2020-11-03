@@ -10,24 +10,26 @@ class ApplicationController < ActionController::Base
   end
 
   def set_guest_user
-    @guest_user = User.find_by(email: 'guest@example.com')
+    @guest_user = User.find_by(email: "guest@example.com")
   end
 
   def authenticate_user
     return unless @current_user.nil?
-
-    # if @current_user.nil?
-    flash[:notice] = 'ログインが必要です'
-    redirect_to('/login')
-    # end
+    flash[:notice] = "ログインが必要です"
+    redirect_to("/login")
   end
 
   def forbid_login_user
     return unless @current_user
-
-    # if @current_user
-    flash[:notice] = 'すでにログインしています'
-    redirect_to('/posts/index')
-    # end
+    flash[:notice] = "すでにログインしています"
+    redirect_to("/posts/index")
   end
+
+
+  def ensure_correct_user
+    return unless @current_user.id != params[:id].to_i
+    flash[:notice] = "権限がありません"
+    redirect_to("/posts/index")
+  end
+
 end

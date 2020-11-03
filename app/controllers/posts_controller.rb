@@ -3,16 +3,16 @@
 # post control
 class PostsController < ApplicationController
   before_action :authenticate_user
-  before_action :ensure_correct_user, { only: %i[edit update destroy] }
+  before_action :ensure_correct_user, { only: [:edit, :update, :destroy] }
 
   def index
     @posts = if params[:area].present?
-               Post.where('area LIKE ?', "%#{params[:area]}%")
-             elsif params[:category].present?
-               Post.where('category LIKE ?', "%#{params[:category]}%")
-             else
-               Post.all
-             end
+      Post.where("area LIKE ?", "%#{params[:area]}%")
+    elsif params[:category].present?
+      Post.where("category LIKE ?", "%#{params[:category]}%")
+    else
+      Post.all
+    end
   end
 
   def new
@@ -26,16 +26,14 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(
-      # **post_params,
-      content: params[:content],
-      category: params[:category],
-      price: params[:price],
-      limit: params[:limit],
-      area: params[:area],
-      user_id: @current_user.id,
-      image: params[:image]
-    )
+    @post = Post.new(post_params)
+      # content: params[:content],
+      # category: params[:category],
+      # price: params[:price],
+      # limit: params[:limit],
+      # area: params[:area],
+      # image: params[:image],
+    @post.user_id = @current_user.id
 
     @post.save!
     if params[:image]
@@ -45,10 +43,10 @@ class PostsController < ApplicationController
     end
 
     if @post.save
-      flash[:notice] = '投稿を作成しました'
-      redirect_to('/posts/index')
+      flash[:notice] = "投稿を作成しました"
+      redirect_to("/posts/index")
     else
-      render('posts/new')
+      render("posts/new")
     end
   end
 
@@ -59,31 +57,30 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find_by(id: params[:id])
-    @post.content = params[:content]
-    @post.category = params[:category]
-    @post.limit = params[:limit]
-    @post.area = params[:area]
-    @post.price = params[:price]
-
+    # @post.content = params[:content]
+    # @post.category = params[:category]
+    # @post.limit = params[:limit]
+    # @post.area = params[:area]
+    # @post.price = params[:price]
+    @post = post_params
     if params[:image]
       @post.image = "#{@post.id}.jpg"
       image = params[:image]
       File.binwrite("public/post_images/#{@post.image}", image.read)
     end
-
     if @post.save
-      flash[:notice] = '投稿を編集しました'
-      redirect_to('/posts/index')
+      flash[:notice] = "投稿を編集しました"
+      redirect_to("/posts/index")
     else
-      render('posts/edit')
+      render("posts/edit")
     end
   end
 
   def destroy
     @post = Post.find_by(id: params[:id])
     @post.destroy!
-    flash[:notice] = '投稿を削除しました'
-    redirect_to('/posts/index')
+    flash[:notice] = "投稿を削除しました"
+    redirect_to("/posts/index")
   end
 
   # コメント機能
@@ -98,9 +95,10 @@ class PostsController < ApplicationController
   end
 
   private
-
-  # ストロングパラメーター
+    # ストロングパラメーター
   def post_params
-    params.permit(:id, :image, :category, :area, :content, :price, :limit, :user_id)
+    # params.permit( :image,  :category,  :area,  :content,  :price,  :limit, )
+    params.permit(:id,  :image,  :category,  :area,  :content,  :price,  :limit,  :user_id)
   end
+
 end

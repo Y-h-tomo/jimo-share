@@ -45,14 +45,20 @@ services:
       context: .
       dockerfile: ./Docker/db/Dockerfile
     image: postgres:13
+    container_name: postgresql
     ports:
       - "5433:5433"
     environment:
-      # POSTGRES_PASSWORD: 'postgres'
-      # # POSTGRES_HOST_AUTH_METHOD: trust
-      - POSTGRES_PASSWORD=password
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      # - POSTGRES_PASSWORD=password
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    hostname: postgres
+    restart: always
+    user: root
   web:
     build:
       context: .
@@ -61,6 +67,21 @@ services:
       - public_data:/jimoshare/public
       - tmp_data:/jimoshare/tmp
     ports:
-      - 80:80
+      - 3000:3000
     depends_on:
       - app
+
+  pgadmin4:
+    image: dpage/pgadmin4:3.3
+    container_name: pgadmin4
+    ports:
+      - 80:80
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin/storage
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root
+      PGADMIN_DEFAULT_PASSWORD: root
+    hostname: pgadmin4
+    restart: always
+    depends_on:
+      - db

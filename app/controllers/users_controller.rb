@@ -2,13 +2,13 @@
 
 # user control
 class UsersController < ApplicationController
-  before_action :authenticate_user, { only: %i[index show edit update] }
-  before_action :forbid_login_user, { only: %i[new create login_form login] }
-  before_action :ensure_correct_user, { only: %i[edit update] }
+  before_action :authenticate_user, { only: [:index, :show, :edit, :update,] }
+  before_action :forbid_login_user, { only: [:new, :create, :login_form, :login,] }
+  before_action :ensure_correct_user, { only: [:edit, :update,] }
 
   def index
     @users = if params[:name].present?
-               User.where('name LIKE ?', "%#{params[:name]}%")
+               User.where("name LIKE ?", "%#{params[:name]}%")
              else
                User.all
              end
@@ -32,15 +32,15 @@ class UsersController < ApplicationController
     @user = User.new(
       name: params[:name],
       email: params[:email],
-      image_name: 'user_sample.png',
-      password: params[:password]
+      image_name: "user_sample.png",
+      password: params[:password],
     )
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = 'ユーザー登録が完了しました'
+      flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/users/#{@user.id}")
     else
-      render('users/new')
+      render("users/new")
     end
   end
 
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     @user.email = params[:email]
     @user.content = params[:content]
 
-    @user.email = 'guest@example.com' if @guest_user
+    @user.email = "guest@example.com" if @guest_user
 
     if params[:image_name]
       @user.image_name = "#{@user.id}.jpg"
@@ -63,26 +63,27 @@ class UsersController < ApplicationController
     end
 
     if @user.save
-      flash[:notice] = 'ユーザー情報を編集しました'
+      flash[:notice] = "ユーザーアカウントを編集しました"
       redirect_to("/users/#{@user.id}")
     else
-      render('users/edit')
+      render("users/edit")
     end
   end
 
-  def login_form; end
+  def login_form
+  end
 
   def login
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
       session[:user_id] = @user.id
-      flash[:notice] = 'ログインしました'
-      redirect_to('/posts/index')
+      flash[:notice] = "ログインに成功しました"
+      redirect_to("/posts/index")
     else
-      @error_message = 'メールアドレスまたはパスワードが間違っています'
+      @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
       @password = params[:password]
-      render('users/login_form')
+      render("users/login_form")
     end
   end
 
@@ -92,8 +93,8 @@ class UsersController < ApplicationController
     else
       session[:user_id] = nil
     end
-    flash[:notice] = 'ログアウトしました'
-    redirect_to('/login')
+    flash[:notice] = "ログアウトしました"
+    redirect_to("/login")
   end
 
   def likes
@@ -101,12 +102,4 @@ class UsersController < ApplicationController
     @likes = Like.where(user_id: @user.id)
   end
 
-  def ensure_correct_user
-    return unless @current_user.id != params[:id].to_i
-
-    flash[:notice] = '権限がありません'
-    redirect_to('/posts/index')
-    # if @current_user.id != params[:id].to_i
-    # end
-  end
 end
