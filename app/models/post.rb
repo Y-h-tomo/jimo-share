@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# 投稿管理モデル
+# Post Management
 class Post < ApplicationRecord
   validates :content, { presence: true, length: { maximum: 200 } }
   validates :user_id, { presence: true }

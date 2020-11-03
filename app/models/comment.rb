@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# コメント管理モデル
+# Comment Management
 class Comment < ApplicationRecord
   validates  :user_id, { presence: true }
   validates  :post_id, { presence: true }

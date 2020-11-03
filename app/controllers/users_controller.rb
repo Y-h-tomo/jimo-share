@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# ユーザー管理コントローラー
+# user control
 class UsersController < ApplicationController
-  # before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
-  # before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
-  # before_action :ensure_correct_user, {only: [:edit, :update]}
+  before_action :authenticate_user, { only: %i[index show edit update] }
+  before_action :forbid_login_user, { only: %i[new create login_form login] }
+  before_action :ensure_correct_user, { only: %i[edit update] }
 
   def index
     @users = if params[:name].present?
@@ -102,9 +102,11 @@ class UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    if @current_user.id != params[:id].to_i
-      flash[:notice] = '権限がありません'
-      redirect_to('/posts/index')
-    end
+    return unless @current_user.id != params[:id].to_i
+
+    flash[:notice] = '権限がありません'
+    redirect_to('/posts/index')
+    # if @current_user.id != params[:id].to_i
+    # end
   end
 end

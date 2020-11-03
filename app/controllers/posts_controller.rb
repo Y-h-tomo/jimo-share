@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-# 投稿管理コントローラー
+# post control
 class PostsController < ApplicationController
+  before_action :authenticate_user
+  before_action :ensure_correct_user, { only: %i[edit update destroy] }
+
   def index
     @posts = if params[:area].present?
                Post.where('area LIKE ?', "%#{params[:area]}%")
@@ -98,7 +101,6 @@ class PostsController < ApplicationController
 
   # ストロングパラメーター
   def post_params
-    # params.rquiree(:post).permit(:image,:category,:area,:content,:price,:limit,)
     params.permit(:id, :image, :category, :area, :content, :price, :limit, :user_id)
   end
 end

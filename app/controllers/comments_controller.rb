@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# コメント管理コントローラー
+# post comment control
 class CommentsController < ApplicationController
   def create
     @post = Post.find_by(id: params[:id])
@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       post_id: params[:post_id],
       comment: params[:comment]
     )
-    @comment.save
+    @comment.save!
     redirect_to("/posts/#{params[:post_id]}")
   end
 
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
       user_id: @current_user.id,
       post_id: params[:post_id]
     )
-    @comment.destroy
+    @comment.destroy!
     redirect_to("/posts/#{params[:post_id]}")
   end
 end
