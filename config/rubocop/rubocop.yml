@@ -136,7 +136,7 @@ Lint/Void:
 # 30 まではギリギリ許せる範囲だったけど
 # リリースごとに 3 ずつぐらい下げていきます。20 まで下げたい。
 Metrics/AbcSize:
-  Max: 24
+  Max: 30
 
 # Gemfile, Guardfile は DSL 的で基本的に複雑にはならないので除外
 # rake, rspec, environments, routes は巨大な block 不可避なので除外
@@ -200,6 +200,9 @@ Naming/MethodParameterName:
 Security/YAMLLoad:
   Enabled: false
 
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
 #################### Style #################################
 
 
@@ -226,8 +229,8 @@ Style/BlockDelimiters:
     - "spec/**/*_spec.rb"
 
 # option 等、明示的にハッシュにした方が分かりやすい場合もある
-# Style/BracesAroundHashParameters:
-#   Enabled: false
+Style/BracesAroundHashParameters:
+  Enabled: false
 
 # scope が違うとか親 module の存在確認が必要とかデメリットはあるが、
 # namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。
@@ -252,9 +255,10 @@ Style/CollectionMethods:
     inject: "inject"
     reduce: "inject"
 
-# ドキュメントの無い public class を許可する
+# ドキュメントの無い public class を許可する　日本語コメント
 Style/Documentation:
   Enabled: false
+
 
 # case
 # when ios?
@@ -441,5 +445,4 @@ Style/WordArray:
 # 中身を入れ替えて否定外しても良いんだけど、どちらが例外的な処理なのかが分かりづらくなる。
 Style/ZeroLengthPredicate:
   Enabled: false
-
 

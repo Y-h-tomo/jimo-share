@@ -88,7 +88,7 @@ class UsersController < ApplicationController
 
   def logout
     if @guest_user
-      @guest_user.destroy
+      @guest_user.destroy!
     else
       session[:user_id] = nil
     end

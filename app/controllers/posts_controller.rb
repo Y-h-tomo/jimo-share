@@ -37,7 +37,7 @@ class PostsController < ApplicationController
       image: params[:image]
     )
 
-    @post.save
+    @post.save!
     if params[:image]
       @post.image = "#{@post.id}.jpg"
       image = params[:image]
@@ -81,7 +81,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find_by(id: params[:id])
-    @post.destroy
+    @post.destroy!
     flash[:notice] = '投稿を削除しました'
     redirect_to('/posts/index')
   end
