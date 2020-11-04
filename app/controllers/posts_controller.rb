@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user, { only: [:edit, :update, :destroy] }
 
   def index
-    @posts = if params[:area].present?
+    if @posts == params[:area].present?
       Post.where("area LIKE ?", "%#{params[:area]}%")
     elsif params[:category].present?
       Post.where("category LIKE ?", "%#{params[:category]}%")
@@ -27,12 +27,6 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-      # content: params[:content],
-      # category: params[:category],
-      # price: params[:price],
-      # limit: params[:limit],
-      # area: params[:area],
-      # image: params[:image],
     @post.user_id = @current_user.id
 
     @post.save!
@@ -95,10 +89,8 @@ class PostsController < ApplicationController
   end
 
   private
-    # ストロングパラメーター
-  def post_params
-    # params.permit( :image,  :category,  :area,  :content,  :price,  :limit, )
-    params.permit(:id,  :image,  :category,  :area,  :content,  :price,  :limit,  :user_id)
-  end
 
+    def post_params
+      params.permit(:id, :image, :category, :area, :content, :price, :limit, :user_id)
+    end
 end
