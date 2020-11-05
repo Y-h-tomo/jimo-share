@@ -6,13 +6,13 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user, { only: [:edit, :update, :destroy] }
 
   def index
-    if @posts == params[:area].present?
-      Post.where("area LIKE ?", "%#{params[:area]}%")
-    elsif params[:category].present?
-      Post.where("category LIKE ?", "%#{params[:category]}%")
-    else
-      Post.all
-    end
+    @posts = if params[:area].present?
+               Post.where("area LIKE ?", "%#{params[:area]}%")
+             elsif params[:category].present?
+               Post.where("category LIKE ?", "%#{params[:category]}%")
+             else
+               Post.all
+             end
   end
 
   def new
