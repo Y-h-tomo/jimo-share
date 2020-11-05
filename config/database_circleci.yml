@@ -5,7 +5,7 @@ default: &default
   username: root
   database: test_sample_db
   password:
-  host: 127.0.0.1
+  host: db
   port: 5432
 
 development:
