@@ -47,7 +47,7 @@ services:
     image: postgres:13
     container_name: postgresql
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
@@ -67,7 +67,7 @@ services:
       - public_data:/jimoshare/public
       - tmp_data:/jimoshare/tmp
     ports:
-      - 3000:3000
+      -  3000:3000
     depends_on:
       - app
 
