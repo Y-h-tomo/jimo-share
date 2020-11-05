@@ -2,7 +2,10 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@6.7.0
+
 jobs:
   rubocop:
     docker:
@@ -67,10 +70,22 @@ jobs:
           command: bundle exec rspec
 
 workflows:
-  version: 2
+  version: 2.1
   rubocop_rspec:
     jobs:
       - rubocop
       - rspec:
           requires:
             - rubocop
+  build_and_push_image:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: ruge.e.azul@gmail.com
+          aws-access-key-id:  AKIARO2HSNR3H4I2WLV7
+          aws-secret-access-key: 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
+          create-repo: true
+          dockerfile: Dockerfile
+          path: .
+          region: ap-northeast-1
+          repo: circleci-ecr-orb-demo
+          tag: "$CIRCLE_SHA1"
