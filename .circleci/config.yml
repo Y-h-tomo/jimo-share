@@ -43,12 +43,12 @@ jobs:
   rspec:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers-legacy
-              environment:
-                RAILS_ENV: test
-                POSTGRES_HOST: 127.0.0.1
-                - image: circleci/postgres
-                environment:
-                  POSTGRES_USER: root
+        environment:
+          RAILS_ENV: test
+          POSTGRES_HOST: 127.0.0.1
+          - image: circleci/postgres
+        environment:
+          POSTGRES_USER: root
           POSTGRES_DB: app_test
           POSTGRES_PASSWORD: root
     working_directory: ~/jimoshare
@@ -102,10 +102,6 @@ workflows:
             filters:
                 branches:
                     only: master
-
-
-
-
                   # build-and-deploy:
                     #   jobs:
                       #     - aws-ecr/build_and_push_image:
