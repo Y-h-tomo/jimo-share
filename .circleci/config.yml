@@ -10,7 +10,6 @@ version: 2.1
 
 jobs:
   rubocop:
-  build:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers-legacy
         environment:
@@ -40,7 +39,6 @@ jobs:
           name: Rubocop
           command: bundle exec rubocop
 
-          
   rspec:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers-legacy
