@@ -42,7 +42,7 @@ jobs:
         environment:
           RAILS_ENV: test
           POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres13
+      - image: circleci/postgres
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: app_test
