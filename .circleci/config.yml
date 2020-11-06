@@ -66,15 +66,15 @@ jobs:
       - run:
           name: Rspec
           command: bundle exec rspec
-      deploy:
-        machine:
-            image: circleci/classic:edge
-        steps:
-            - checkout
-            # CircleCI に登録した秘密鍵を呼び出す
-            - add_ssh_keys:
-            # CircleCI に登録した環境変数を使って SSH
-            - run: ssh ${USER_NAME}@${HOST_NAME} 'cd [jimoshare] && git pull'
+    deploy:
+      machine:
+          image: circleci/classic:edge
+      steps:
+          - checkout
+          # CircleCI に登録した秘密鍵を呼び出す
+          - add_ssh_keys:
+          # CircleCI に登録した環境変数を使って SSH
+          - run: ssh ${USER_NAME}@${HOST_NAME} 'cd [jimoshare] && git pull'
 # workflows:
 #   version: 2.1
 #   rubocop_rspec:
