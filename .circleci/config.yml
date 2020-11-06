@@ -45,7 +45,7 @@ jobs:
       - image: circleci/postgres
         environment:
           POSTGRES_USER: root
-          POSTGRES_DB: app_test
+          POSTGRES_DB: jimoshare_test
           POSTGRES_PASSWORD: root
     working_directory: ~/jimoshare
     steps:
