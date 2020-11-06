@@ -63,7 +63,7 @@ development:
 test:
   <<: *default
   database: jimoshare_test
-  host: localhost
+  # host: localhost
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -86,14 +86,13 @@ test:
 #
 production:
   <<: *default
-  # database: jimoshare_production
-  # username: jimoshare
-  # password: <%= ENV['JIMOSHARE_DATABASE_PASSWORD'] %>
-  database: <%= ENV['DB_DATABASE'] %>
+  database: jimoshare_production
+  username: jimoshare
+  password: <%= ENV['JIMOSHARE_DATABASE_PASSWORD'] %>
   adapter: postgresql
   encoding: unicode
-  charset: utf8mb4
-  collation: utf8mb4_general_ci
-  host: <%= ENV['DB_HOST'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  # charset: utf8mb4
+  # collation: utf8mb4_general_ci
+  # host: <%= ENV['DB_HOST'] %>
+  # username: <%= ENV['DB_USERNAME'] %>
+  # password: <%= ENV['DB_PASSWORD'] %>
