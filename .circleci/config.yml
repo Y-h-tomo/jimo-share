@@ -10,6 +10,7 @@ version: 2.1
 
 jobs:
   rubocop:
+  build:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers-legacy
         environment:
@@ -42,34 +43,43 @@ jobs:
   rspec:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers-legacy
-        environment:
-          RAILS_ENV: test
-          POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres
-        environment:
-          POSTGRES_USER: root
+              environment:
+                RAILS_ENV: test
+                POSTGRES_HOST: 127.0.0.1
+                - image: circleci/postgres
+                environment:
+                  POSTGRES_USER: root
           POSTGRES_DB: app_test
           POSTGRES_PASSWORD: root
     working_directory: ~/jimoshare
     steps:
       - checkout
       - restore_cache:
-          keys:
+        keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
       - save_cache:
-          paths:
+        paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: bundle exec rake db:create
+            key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
       # Rspec
       - run:
-          name: Rspec
-          command: bundle exec rspec
+        name: Rspec
+        command: bundle exec rspec
+  deploy:
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      # CircleCI に登録した秘密鍵を呼び出す
+      - add_ssh_keys:
+      # CircleCI に登録した環境変数を使って SSH
+      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd [あなたのプロジェク] && git pull'
 
 workflows:
   version: 2.1
@@ -77,20 +87,37 @@ workflows:
     jobs:
       - rubocop
       - rspec:
-          requires:
-            - rubocop
-  # build-and-deploy:
-  #   jobs:
-  #     - aws-ecr/build_and_push_image:
-  #         account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}
-  #         .amazonaws.com"
-  #         repo: "${AWS_RESOURCE_NAME_PREFIX}"
-  #         region: ${AWS_DEFAULT_REGION}
-  #         tag: "${CIRCLE_SHA1}"
+        requires:
+          - rubocop
+  # build_and_deploy ジョブ: 一番最初に呼ばれるジョブ
+  build_and_deploy:
+    # build ジョブと deploy ジョブを呼び出す
+    jobs:
+        - build
+        - deploy:
+            requires:
+                # deploy ジョブより先に build ジョブを実行しろ！
+                - build
+            # master ブランチに push された場合のみ deploy ジョブを実行する
+            filters:
+                branches:
+                    only: master
 
 
 
-# version: 2.1
+
+                  # build-and-deploy:
+                    #   jobs:
+                      #     - aws-ecr/build_and_push_image:
+                        #         account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}
+                        #         .amazonaws.com"
+                        #         repo: "${AWS_RESOURCE_NAME_PREFIX}"
+                        #         region: ${AWS_DEFAULT_REGION}
+                        #         tag: "${CIRCLE_SHA1}"
+
+
+
+                        # version: 2.1
 # orbs:
 #   aws-ecr: circleci/aws-ecr@6.7.0
 #   aws-ecs: circleci/aws-ecs@1.1.0
