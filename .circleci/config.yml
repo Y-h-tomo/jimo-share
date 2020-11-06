@@ -46,7 +46,7 @@ jobs:
         environment:
           RAILS_ENV: test
           POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres
+          - image: circleci/postgres
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: app_test
@@ -63,9 +63,9 @@ jobs:
       - run: yarn install
       - save_cache:
         paths:
-              - ./vendor/bundle
-              key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-          - run: bundle exec rake db:create
+            - ./vendor/bundle
+            key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
       # Rspec
       - run:
@@ -79,7 +79,7 @@ jobs:
       # CircleCI に登録した秘密鍵を呼び出す
       - add_ssh_keys:
       # CircleCI に登録した環境変数を使って SSH
-      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd [jimoshare] && git pull'
+      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd [あなたのプロジェク] && git pull'
 
 workflows:
   version: 2.1
