@@ -80,6 +80,6 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootstrap", "~> 4.1.1"
 gem "jquery-rails"
 
-group :production, :staging do
-    gem 'unicorn'
-end
+# group :production, :staging do
+#     gem 'unicorn'
+# end
