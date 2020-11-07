@@ -79,8 +79,6 @@ header {
   transition: 0.3s;
    background-color:orange;
   }
-  &:active{
-  }
 }
 
 // フラッシュメッセージここから
@@ -93,9 +91,10 @@ header {
   z-index: 800;
 }
 .alert {
-  opacity: 0.8;
   margin: auto;
   text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 // ゲストメッセージここから
 .guest-message{
