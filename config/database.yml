@@ -91,8 +91,6 @@ production:
   password: <%= ENV['JIMOSHARE_DATABASE_PASSWORD'] %>
   adapter: postgresql
   encoding: unicode
-  # charset: utf8mb4
-  # collation: utf8mb4_general_ci
-  # host: <%= ENV['DB_HOST'] %>
+  host: <%= ENV['DB_HOST'] %>
   # username: <%= ENV['DB_USERNAME'] %>
   # password: <%= ENV['DB_PASSWORD'] %>
