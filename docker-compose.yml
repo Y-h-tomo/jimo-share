@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 volumes:
   postgres_data:
   public_data:
@@ -44,21 +44,21 @@ services:
       - public_data:/jimoshare/public
       - tmp_data:/jimoshare/tmp
     ports:
-      -  3000:3000
+      - 3000:3000
     depends_on:
       - app
 
-  pgadmin4:
-    image: dpage/pgadmin4:3.3
-    container_name: pgadmin4
-    ports:
-      - 80:80
-    volumes:
-      - ./pgadmin:/var/lib/pgadmin/storage
-    environment:
-      PGADMIN_DEFAULT_EMAIL: root
-      PGADMIN_DEFAULT_PASSWORD: root
-    hostname: pgadmin4
-    restart: always
-    depends_on:
-      - db
+  # pgadmin4:
+  #   image: dpage/pgadmin4:3.3
+  #   container_name: pgadmin4
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./pgadmin:/var/lib/pgadmin/storage
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: root
+  #     PGADMIN_DEFAULT_PASSWORD: root
+  #   hostname: pgadmin4
+  #   restart: always
+  #   depends_on:
+  #     - db

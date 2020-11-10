@@ -2,7 +2,9 @@
 FROM ruby:2.6.5
 
 # ＃必要なライブラリを取得
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apt-get update -qq && \
+  apt-get install -y build-essential libpq-dev nodejs \
+  vim
 
 ENV RAILS_ROOT /jimoshare
 
