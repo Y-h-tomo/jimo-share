@@ -10,6 +10,8 @@ services:
       context: .
       dockerfile: ./Docker/app/Dockerfile
     command: bundle exec puma -C config/puma.rb
+    ports:
+      - 3000:3000
     volumes:
       - .:/jimoshare
       - public_data:/jimoshare/public

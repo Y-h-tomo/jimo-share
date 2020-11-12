@@ -86,11 +86,16 @@ test:
 #
 production:
   <<: *default
-  database: jimoshare_production
-  username: jimoshare
-  password: <%= ENV['JIMOSHARE_DATABASE_PASSWORD'] %>
-  adapter: postgresql
-  encoding: unicode
-  host: <%= ENV['DB_HOST'] %>
+  host: jimoshare-psql.cazw7at7vqud.ap-northeast-1.rds.amazonaws.com
+  database: Jimoshare_production
+  username: root
+  password: Gucchi38a
+
+  # database: jimoshare_production
+  # username: jimoshare
+  # password: <%= ENV['JIMOSHARE_DATABASE_PASSWORD'] %>
+  # adapter: postgresql
+  # encoding: unicode
+  # host: <%= ENV['DB_HOST'] %>
   # username: <%= ENV['DB_USERNAME'] %>
   # password: <%= ENV['DB_PASSWORD'] %>
