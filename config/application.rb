@@ -14,8 +14,8 @@ module Jimoshare
     config.load_defaults 6.0
 
     # -----------add begin--------------
-    # config.time_zone = 'Tokyo'
-
+    config.time_zone = 'Tokyo'
+    # updated_at.strftime("%Y-%m-%d %H:%M")
     # config.generators do |g|
     #   g.test_framework :rspec,
     #                    view_specs: false,

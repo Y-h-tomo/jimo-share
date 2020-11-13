@@ -3,12 +3,6 @@
   <div class="title_container">
     <span><%= image_tag 'jimo_icon.png', class: 'top_title' %></span>
   </div>
-  <div class="btn_container row">
-      <button type="button" class="btn btn-info col-sm">分類で見る</button>
-      <button type="button" class="btn btn-info col-sm">期限で見る</button>
-      <button type="button" class="btn btn-info col-sm">値段で見る</button>
-      <button type="button" class="btn btn-info col-sm">場所で見る</button>
-  </div>
     <% if @current_user == nil %>
       <div class="guest-icon rounded-right">
         <%= link_to "login/guest",{method: :post} do %>

@@ -37,9 +37,9 @@
         <p class="card-text"><%= post.content %></p><br>
         <span class="badge badge-success">場所</span>
         <p class="card-area"><%= post.area %></p>
-         <span class="badge badge-warning">期限: <%= l post.limit, format: :short  %></span><br>
+         <span class="badge badge-warning">期限: <%= post.limit.to_s(:datetime_jp) %></span><br>
          <span class="badge badge-danger">¥</span><a class="text-danger"><%= post.price.to_i %></a>
-        <span class="badge badge-secondary">最終編集: <%= l  post.updated_at, format: :long %></span><br>
+        <span class="badge badge-secondary">最終編集: <%= post.updated_at.to_s(:datetime_jp) %></span><br>
         <%= link_to "/posts/#{post.id}" do %>
           <button class="btn btn-outline-primary btn-sm">詳細へ</button>
       <% end %>
@@ -48,6 +48,5 @@
     <% end %>
         </div>
       </div>
-   <%= debug(params) if Rails.env.development? %>
    <%# 閉じ %>
   </div>
