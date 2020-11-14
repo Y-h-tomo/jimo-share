@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: ./Docker/db/Dockerfile
-    image: postgres:13
+    image: postgres
     container_name: postgresql
     ports:
       - "5433:5432"

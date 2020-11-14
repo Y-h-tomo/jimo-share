@@ -24,4 +24,5 @@ RUN bundle install --jobs 20 --retry 5 --without production
 #ホストのアプリケーションディレクトリ内をすべてコンテナにコピー
 COPY . .
 
+
 RUN mkdir -p tmp/sockets
